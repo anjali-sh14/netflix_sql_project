@@ -191,17 +191,8 @@ LIMIT 5;
 
 **Objective:** Calculate and rank years by the average number of content releases by India.
 
-### 11. List All Movies that are Documentaries
 
-```sql
-SELECT * 
-FROM netflix
-WHERE listed_in LIKE '%Documentaries';
-```
-
-**Objective:** Retrieve all movies classified as documentaries.
-
-### 12. Find All Content Without a Director
+### 10. Find All Content Without a Director
 
 ```sql
 SELECT * 
@@ -209,52 +200,6 @@ FROM netflix
 WHERE director IS NULL;
 ```
 
-**Objective:** List content that does not have a director.
-
-### 13. Find How Many Movies Actor 'Salman Khan' Appeared in the Last 10 Years
-
-```sql
-SELECT * 
-FROM netflix
-WHERE casts LIKE '%Salman Khan%'
-  AND release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10;
-```
-
-**Objective:** Count the number of movies featuring 'Salman Khan' in the last 10 years.
-
-### 14. Find the Top 10 Actors Who Have Appeared in the Highest Number of Movies Produced in India
-
-```sql
-SELECT 
-    UNNEST(STRING_TO_ARRAY(casts, ',')) AS actor,
-    COUNT(*)
-FROM netflix
-WHERE country = 'India'
-GROUP BY actor
-ORDER BY COUNT(*) DESC
-LIMIT 10;
-```
-
-**Objective:** Identify the top 10 actors with the most appearances in Indian-produced movies.
-
-### 15. Categorize Content Based on the Presence of 'Kill' and 'Violence' Keywords
-
-```sql
-SELECT 
-    category,
-    COUNT(*) AS content_count
-FROM (
-    SELECT 
-        CASE 
-            WHEN description ILIKE '%kill%' OR description ILIKE '%violence%' THEN 'Bad'
-            ELSE 'Good'
-        END AS category
-    FROM netflix
-) AS categorized_content
-GROUP BY category;
-```
-
-**Objective:** Categorize content as 'Bad' if it contains 'kill' or 'violence' and 'Good' otherwise. Count the number of items in each category.
 
 ## Findings and Conclusion
 
@@ -264,20 +209,3 @@ GROUP BY category;
 - **Content Categorization:** Categorizing content based on specific keywords helps in understanding the nature of content available on Netflix.
 
 This analysis provides a comprehensive view of Netflix's content and can help inform content strategy and decision-making.
-
-
-
-## Author - Zero Analyst
-
-This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. If you have any questions, feedback, or would like to collaborate, feel free to get in touch!
-
-### Stay Updated and Join the Community
-
-For more content on SQL, data analysis, and other data-related topics, make sure to follow me on social media and join our community:
-
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community to learn and grow together](https://discord.gg/36h5f2Z5PK)
-
-Thank you for your support, and I look forward to connecting with you!
